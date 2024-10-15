@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'courses/base.html' %}
 
 {% block content %}
 
@@ -9,19 +9,20 @@
 </head>
 
 <body>
-    <form method="POST">
-        {% csrf_token %}
-        {% for f in form %}
-        <p><label class="form-label" >{{f.label}}: </label>{{ f }}</p>
-        <div class="form-error">{{ f.errors }}</div>
-        {% endfor %}
-        <button class="btn btn-primary" type="submit">Register</button>
-    </form>
+    <div class="container" style="max-width: 30%; text-align: center; margin:0 auto;">
+        <h1>Register New Account</h1>
+        <div class="card">
+            <form method="POST" class="m-3">
+                {% csrf_token %}
+                {% for f in form %}
+                <p><label class="form-label">{{f.label}}: </label>{{ f }}</p>
+                <div class="form-error">{{ f.errors }}</div>
+                {% endfor %}
+                <button class="btn btn-primary" type="submit">Register</button>
+            </form>
+        </div>
 </body>
 
 </html>
-
-{% endblock %}
-
 
 {% endblock content %}

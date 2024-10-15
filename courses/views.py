@@ -26,7 +26,7 @@ class LoginView(LoginView):
 class RegisterView(generic.CreateView):
     form_class = UserRegisterForm
     template_name = 'courses/register.html'
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('courses:login')
 
     def form_valid(self, form):
         user = form.save()
