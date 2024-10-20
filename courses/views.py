@@ -3,7 +3,7 @@ from django.contrib.auth import (
     logout,
 )
 from django.contrib.auth.views import LoginView
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -11,12 +11,22 @@ from courses.forms import (
     UserLoginForm,
     UserRegisterForm,
 )
+from courses.models import CourseModel, CategoryModel
 
 # Create your views here.
 
 
 class IndexView(generic.View):
-    pass
+    template_name = "courses/index.html"
+
+    def get(self, request):
+        courses = CourseModel.objects.order_by("rating")
+        categs = CategoryModel.objects.values()
+        return render(request, self.template_name, {"courses": courses, "categs": categs})
+
+
+
+
 
 
 class LoginView(LoginView):
