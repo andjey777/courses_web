@@ -5,9 +5,9 @@ include_trailing_comma = "True"
 force_grid_wrap = 2
 ensure_newline_before_comments = "True"
 line_length = 120
-skip = "migrations"
+skip = ["migrations", ".venv"]
 atomic = "True"
 
 [tool.black]
-exclude = '/(git||venv|data|migrations)/'
+exclude = '/(git||.venv|data|migrations)/'
 line-length = 120

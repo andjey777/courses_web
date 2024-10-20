@@ -1,12 +1,19 @@
-from django.contrib.auth import login, logout
-from django.shortcuts import redirect, render
+from django.contrib.auth import (
+    login,
+    logout,
+)
+from django.contrib.auth.views import LoginView
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
-from django.contrib.auth.views import LoginView
 
-from courses.forms import UserLoginForm, UserRegisterForm
+from courses.forms import (
+    UserLoginForm,
+    UserRegisterForm,
+)
 
 # Create your views here.
+
 
 class IndexView(generic.View):
     pass
@@ -23,17 +30,18 @@ class LoginView(LoginView):
     def get_success_url(self):
         return reverse_lazy("courses:index")
 
+
 class RegisterView(generic.CreateView):
     form_class = UserRegisterForm
-    template_name = 'courses/register.html'
-    success_url = reverse_lazy('courses:login')
+    template_name = "courses/register.html"
+    success_url = reverse_lazy("courses:login")
 
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('courses:index')
+        return redirect("courses:index")
+
 
 def Logout_View(request):
     logout(request)
     return redirect("courses:index")
-
