@@ -3,7 +3,10 @@ from django.contrib.auth import (
     logout,
 )
 from django.contrib.auth.views import LoginView
-from django.shortcuts import redirect, render
+from django.shortcuts import (
+    redirect,
+    render,
+)
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -11,7 +14,10 @@ from courses.forms import (
     UserLoginForm,
     UserRegisterForm,
 )
-from courses.models import CourseModel, CategoryModel
+from courses.models import (
+    CategoryModel,
+    CourseModel,
+)
 
 # Create your views here.
 
@@ -23,6 +29,7 @@ class IndexView(generic.View):
         courses = CourseModel.objects.order_by("rating")
         categs = CategoryModel.objects.values()
         return render(request, self.template_name, {"courses": courses, "categs": categs})
+
 
 class CourseView(generic.DetailView):
     template_name = "courses/course.html"
@@ -39,7 +46,7 @@ class CategoryView(generic.DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["courses"] = CourseModel.objects.filter(category__id=self.kwargs['pk'])
+        context["courses"] = CourseModel.objects.filter(category__id=self.kwargs["pk"])
         return context
 
 

@@ -1,7 +1,13 @@
 from django.contrib import admin
-from courses.models import CategoryModel, CourseModel, CourseCommentsModel
+
+from courses.models import (
+    CategoryModel,
+    CourseCommentsModel,
+    CourseModel,
+)
 
 # Register your models here.
+
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ["id", "name"]

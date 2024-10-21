@@ -1,5 +1,8 @@
 from django.conf import settings
-from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.validators import (
+    MaxValueValidator,
+    MinValueValidator,
+)
 from django.db import models
 
 # Create your models here.
@@ -7,7 +10,8 @@ from django.db import models
 
 class CategoryModel(models.Model):
     name = models.CharField(max_length=50)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,blank=True,null=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    # description = models.CharField(max_length=500)
     date_created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
 
@@ -21,10 +25,8 @@ class CategoryModel(models.Model):
 class CourseModel(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=500)
-    rating = models.FloatField(default=0,validators=[
-            MaxValueValidator(5),
-            MinValueValidator(0)
-        ])
+    # text = models.
+    rating = models.FloatField(default=0, validators=[MaxValueValidator(5), MinValueValidator(0)])
     category = models.ForeignKey("CategoryModel", on_delete=models.CASCADE)
     times_viewed = models.IntegerField(default=0)
     times_completed = models.IntegerField(default=0)
